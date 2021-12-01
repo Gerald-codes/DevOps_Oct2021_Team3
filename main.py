@@ -24,20 +24,22 @@ def mainMenu():
 # MenuMenu Option 1 - Load City For New Game
 def loadCity(file):
     mainCity = []
-    with open(file,encoding='utf-8-sig',newline='') as csvfile:
-        spamreader = csv.reader(csvfile)
-        for x in spamreader:
-            col = []
-            for i in x:
-                if i == '*':
-                    i = ' '
-                col.append(i)
+    try:
+        with open(file,encoding='utf-8-sig',newline='') as csvfile:
+            spamreader = csv.reader(csvfile)
+            for x in spamreader:
+                col = []
+                for i in x:
+                    if i == '*':
+                        i = ' '
+                    col.append(i)
 
-            mainCity.append(col)  
-    import copy
-    playCity=copy.deepcopy(mainCity)
-    return playCity
-
+                mainCity.append(col)  
+        import copy
+        playCity=copy.deepcopy(mainCity)
+        return playCity
+    except:
+        return False
 # MenuMenu Option 1 - Initiate Building Pools With 8 Copies Of Each Building For New Game
 def initBuildingPools():
     #Structured Array For Buildings Pool
@@ -55,6 +57,7 @@ def loadSavedGame():
             line=line.strip('\n')
             lineList=list(line)
             mainCity.append(lineList)
+        file.close()
         return mainCity
     except Exception as e:
         print('\nThere is no saved game.')
@@ -72,6 +75,7 @@ def loadSavedBuildingPools():
             var = (bName, bAmount)
             varList.append(var)
         bPools = np.array(varList, dtype=[('Building','U5'),('Copies','<i4')])
+        file.close()
         return bPools
     except Exception as e:
         print('\nThere is no saved Building Pools.')
@@ -83,6 +87,7 @@ def loadSavedTurns():
         file=open('savedTurns.csv','r')
         for line in file:
             turn = int(line)
+        file.close()
         return turn
     except Exception as e:
         print('\nThere is no saved turns.')
@@ -588,27 +593,27 @@ def gameMenu(bPool,playCity,turn):
                     print("\nInvalid option, please try again")
 
 # Menu Menu
-while True:
-    mainMenu()
-    choice = input(str('\nEnter your choice? '))
-    # Start New Game
-    if (choice == '1'):    
-        playCity = loadCity('start.csv')
-        buildingPools = initBuildingPools()
-        gameMenu(buildingPools,playCity,turn=1)
-    # Load Saved game
-    elif (choice == '2'): 
-        playCity = loadSavedGame()
-        if (playCity != ''):
-            buildingPools = loadSavedBuildingPools()
-            gameMenu(buildingPools,playCity,turn=loadSavedTurns())
-        else:
-            pass
-    # Exit Menu
-    elif (choice == '0'):
-        print('\nThank you for playing Simp City!')
-        break
-    # Validate for Invalid Input
-    else:
-        print('\nInvalid option, please try again!')
+# while True:
+#     mainMenu()
+#     choice = input(str('\nEnter your choice? '))
+#     # Start New Game
+#     if (choice == '1'):    
+#         playCity = loadCity('start.csv')
+#         buildingPools = initBuildingPools()
+#         gameMenu(buildingPools,playCity,turn=1)
+#     # Load Saved game
+#     elif (choice == '2'): 
+#         playCity = loadSavedGame()
+#         if (playCity != ''):
+#             buildingPools = loadSavedBuildingPools()
+#             gameMenu(buildingPools,playCity,turn=loadSavedTurns())
+#         else:
+#             pass
+#     # Exit Menu
+#     elif (choice == '0'):
+#         print('\nThank you for playing Simp City!')
+#         break
+#     # Validate for Invalid Input
+#     else:
+#         print('\nInvalid option, please try again!')
     
