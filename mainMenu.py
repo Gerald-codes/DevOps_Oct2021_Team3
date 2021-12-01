@@ -1,10 +1,6 @@
-# Imports
-from city.loadCity import loadCity
-from buildings.initBuildings import initBuildingPools
-from savedGame.loadSavedGame import loadSavedBuildingPools, loadSavedGame, loadSavedTurns
+from main import loadCity, loadSavedBuildingPools, loadSavedGame, initBuildingPools, loadSavedTurns
 from gameMenu import gameMenu
 
-# Menu Menu
 def mainMenu():
     # Display Main Menu
     print('\nWelcome, mayor of Simp City!')
