@@ -48,9 +48,9 @@ def initBuildingPools():
     return buildingPools
 
 # MenuMenu Option 2 - Load Saved Game
-def loadSavedGame():
+def loadSavedGame(filename):
     try:
-        file=open('savedGame.csv','r')
+        file=open('{}.csv'.format(filename),'r')
         mainCity=[]
         lineList=[]
         for line in file:
@@ -64,9 +64,9 @@ def loadSavedGame():
         return ''
 
 # MenuMenu Option 2 - Load Saved Building Pools
-def loadSavedBuildingPools():
+def loadSavedBuildingPools(filename):
     try:
-        file=open('savedBuildingPools.csv','r')
+        file=open('{}.csv'.format(filename),'r')
         varList=[]
         for line in file:
             line=line.strip('\n')
@@ -82,9 +82,9 @@ def loadSavedBuildingPools():
         return ''
 
 # MenuMenu Option 2 - Load Saved Turns
-def loadSavedTurns():
+def loadSavedTurns(filename):
     try:
-        file=open('savedTurns.csv','r')
+        file=open('{}.csv'.format(filename),'r')
         for line in file:
             turn = int(line)
         file.close()
@@ -238,6 +238,7 @@ def ViewCurrentScore(playCity):
 
     totalScore = BCHScore + FACScore + HSEScore + SHPScore + HWPScore
     print("\nTotal score : ", totalScore)
+    return totalScore
     
 def mapBuildingsToCords(playCity):
     # Create Dictionary 
@@ -603,10 +604,10 @@ def gameMenu(bPool,playCity,turn):
 #         gameMenu(buildingPools,playCity,turn=1)
 #     # Load Saved game
 #     elif (choice == '2'): 
-#         playCity = loadSavedGame()
+#         playCity = loadSavedGame('savedGame')
 #         if (playCity != ''):
-#             buildingPools = loadSavedBuildingPools()
-#             gameMenu(buildingPools,playCity,turn=loadSavedTurns())
+#             buildingPools = loadSavedBuildingPools('savedBuildingPools')
+#             gameMenu(buildingPools,playCity,turn=loadSavedTurns('savedTurns'))
 #         else:
 #             pass
 #     # Exit Menu
